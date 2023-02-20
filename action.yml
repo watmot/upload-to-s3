@@ -1,0 +1,22 @@
+name: 'Upload to S3'
+description: 'Prepare static NextJS build, exported to ./out'
+inputs:
+  aws-role:
+    description: 'ARN of the AWS role.'
+    required: true
+  s3-bucket:
+    description: 'ARN of the S3 bucket.'
+    required: true
+  file-path:
+    description: 'Path of the file/folder to be uploaded.'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ inputs.aws-role }}
+        aws-region: eu-west-2
+    - run: |
+        aws s3 sync £{{ inputs.file-path }} ${{ inputs.s3-bucket }}
+      shell: bash

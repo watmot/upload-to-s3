@@ -22,5 +22,5 @@ runs:
         role-to-assume: ${{ inputs.aws-role }}
         aws-region: ${{ inputs.aws-region }}
     - run: |
-        aws s3 sync £{{ inputs.file-path }} ${{ inputs.s3-bucket }}
+        aws s3 sync ${{ inputs.file-path }} ${{ inputs.s3-bucket }}
       shell: bash

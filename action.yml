@@ -4,6 +4,10 @@ inputs:
   aws-role:
     description: 'ARN of the AWS role.'
     required: true
+  aws-region:
+    description: 'Region of the S3 bucket.'
+    required: true
+    default: eu-west-2
   s3-bucket:
     description: 'ARN of the S3 bucket.'
     required: true
@@ -16,7 +20,7 @@ runs:
     - uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ inputs.aws-role }}
-        aws-region: eu-west-2
+        aws-region: ${{ inputs.aws-region }}
     - run: |
         aws s3 sync £{{ inputs.file-path }} ${{ inputs.s3-bucket }}
       shell: bash
